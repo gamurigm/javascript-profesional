@@ -1,9 +1,12 @@
 import MediaPlayer from './MediaPLayer.js';
 import AutoPlay from './plugins/AutoPlay.js';
+import AutoPause from './plugins/AutoPause.js';
 
 const video = document.querySelector("video")
-const player = new MediaPlayer({ el: video, plugins:
-                                   [new AutoPlay()] });
+const player = new MediaPlayer({ 
+   el: video,                
+   plugins: [new AutoPlay(), new AutoPause()],
+});
 //    const player = new MediaPlayer({el: video})
 //    button.onclick = () => {
 //    if(player.isPaused()) {
@@ -16,9 +19,11 @@ const player = new MediaPlayer({ el: video, plugins:
  playButton.onclick = () => player.togglePlay();
 
  const muteButton = document.querySelector('#muteButton')
- if (player.media.muted) {
-    muteButton.onclick = () => player.unmute();
- }else {
-    player.mute();
- }
+ muteButton.onclick = () => {
+   if (player.media.muted) {
+      player.unmute();
+  }else {
+     player.mute();
+  }  
+};
  

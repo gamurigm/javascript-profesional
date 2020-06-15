@@ -35,14 +35,14 @@
       loadButton.onclick = async function() {
         startLoading();
 
-        controller = new AbortController();
+        controller = new AbortController();  // clase para controlar
 
-        try {
-          const response = await fetch(url, { signal: controller.signal });
-          const blob = await response.blob();
-          const imgUrl = URL.createObjectURL(blob);
+        try { //manejo de errores
+          const response = await fetch(url, { signal: controller.signal }); //objeto de configuración señal
+          const blob = await response.blob();   //blob es el archivo binario de la petición
+          const imgUrl = URL.createObjectURL(blob); //los navegadores tinene su forma de convertir bnarios a url
           img.src = imgUrl;
-        } catch (error) {
+        } catch (error) {  //almacena el error
           console.log(error.message);
         }
 
@@ -50,7 +50,7 @@
       };
 
       stopButton.onclick = function() {
-        controller.abort();
+        controller.abort(); //si decidimos detener
         stopLoading();
       };
     </script>
