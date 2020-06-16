@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('fetch', event => {
   const request = event.request;
-  // get
+  // get: sólo hacer con las peticiones get
   if (request.method !== 'GET') {
     return;
   }
@@ -35,11 +35,11 @@ async function precache() {
 async function cachedResponse(request) {
   const cache = await caches.open(VERSION);
   const response = await cache.match(request);
-  return response || fetch(request);
+  return response || fetch(request);  //si no conseguimos la respuesta la buscamos en la red
 }
 
 async function updateCache(request) {
   const cache = await caches.open(VERSION);
   const response = await fetch(request);
-  return cache.put(request, response);
+  return cache.put(request, response); //nuevo contenido del caché
 }
